@@ -197,7 +197,7 @@ router.get('/get-admin-index',(req,res)=>{
 
 
 
-router.get('/get-master-index',(req,res)=>{
+router.post('/get-master-index',(req,res)=>{
     var query = `select sum(price) as totalamount from earning where date = CURDATE() and masterid = '${req.session.masterid}';`
     var query1 = `select * from ${table2} where masterid = '${req.session.masterid}' order by id desc;`
     pool.query(query+query1,(err,result)=>{
