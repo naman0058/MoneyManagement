@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
 router.post('/login',(req,res)=>{
     let body = req.body;
     if(req.body.type == 'admin'){
-        pool.query(`select * from ${table} where number = '${req.body.number}'`,(err,result)=>{
+        pool.query(`select * from ${table1} where number = '${req.body.number}' and password = '${rq.body.password}'`,(err,result)=>{
             if(err) throw err;
             else if(result[0]){
                 res.json({
@@ -36,7 +36,7 @@ router.post('/login',(req,res)=>{
 
     }
     else if(req.body.type=='master'){
-        pool.query(`select * from ${table1} where number = '${req.body.number}'`,(err,result)=>{
+        pool.query(`select * from ${table1} where number = '${req.body.number}' and password = '${rq.body.password}'`,(err,result)=>{
             if(err) throw err;
             else if(result[0]){
                 res.json({
@@ -51,7 +51,7 @@ router.post('/login',(req,res)=>{
         })
     }
     else {
-        pool.query(`select * from ${table2} where number = '${req.body.number}'`,(err,result)=>{
+        pool.query(`select * from ${table1} where number = '${req.body.number}' and password = '${rq.body.password}'`,(err,result)=>{
             if(err) throw err;
             else if(result[0]){
                 res.json({
@@ -70,18 +70,7 @@ router.post('/login',(req,res)=>{
 
 
 
-
-
-router.post('/master-lock',(req,res)=>{
-    pool.query(`update ${table1} set status = 'locked' where number = '${req.body.number}'`,(err,result)=>{
-        if(err) throw err;
-        else res.json({
-            msg : 'success'
-        })
-    })
-})
-
-
+// Admin Part
 
 
 router.post('/add-master',(req,res)=>{
@@ -119,6 +108,17 @@ router.post('/add-agent',(req,res)=>{
 
 
 
+router.post('/show-all-agent',(req,res)=>{
+    pool.query(`select * from ${table2} order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json({
+            msg : 'success'
+        })
+    })
+})
+
+
+
 
 router.post('/show-agent',(req,res)=>{
     pool.query(`select * from ${table2} where masterid = '${req.body.masterid}' order by id desc`,(err,result)=>{
@@ -128,6 +128,27 @@ router.post('/show-agent',(req,res)=>{
         })
     })
 })
+
+
+
+
+
+router.post('/show-all-customer',(req,res)=>{
+    pool.query(`select * from ${table3} order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json({
+            msg : 'success'
+        })
+    })
+})
+
+
+
+
+
+
+// admin part completed
+
 
 
 router.post('/add-customer',(req,res)=>{
