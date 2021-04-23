@@ -1,7 +1,5 @@
 const { resolveInclude } = require('ejs');
 var express = require('express');
-const { Tab } = require('native-base');
-const { route } = require('.');
 var router = express.Router();
 var pool = require('./pool')
 
@@ -22,7 +20,7 @@ router.get('/', function(req, res, next) {
 router.post('/login',(req,res)=>{
     let body = req.body;
     if(req.body.type == 'admin'){
-        pool.query(`select * from ${table1} where number = '${req.body.number}' and password = '${rq.body.password}'`,(err,result)=>{
+        pool.query(`select * from ${table} where number = '${req.body.number}' and password = '${rq.body.password}'`,(err,result)=>{
             if(err) throw err;
             else if(result[0]){
                 res.json({
