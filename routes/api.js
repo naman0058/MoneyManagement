@@ -1,5 +1,6 @@
 const { resolveInclude } = require('ejs');
 var express = require('express');
+const { route } = require('.');
 var router = express.Router();
 var pool = require('./pool')
 
@@ -226,6 +227,36 @@ router.get('/single-agent',(req,res)=>{
 })
 
 
+
+
+
+router.post('/agent-index',(req,res)=>{
+    var query = `select sum(price) as totalamount from earning where date = CURDATE() and agentid = '${req.body.agentid}';`
+    var query1 = `select * from ${table3} where agentid = '${req.body.agentid}' order by id desc;`
+   pool.query(query+query1,(err,result)=>{
+       if(err) throw err;
+       else res.json(result)
+   })
+})
+
+
+
+
+router.post('/save-earning',(req,res)=>{
+    let body = req.body;
+    pool.query(`insert into earning set ?`,body,(err,result)=>{
+        if(err) throw err;
+        else res.json({
+            msg : 'success'
+        })
+    })
+})
+
+
+
+// router.post('/master-report',(req,res)=>{
+//     pool.query(`select * from earning `)
+// })
 
 
 module.exports = router;
