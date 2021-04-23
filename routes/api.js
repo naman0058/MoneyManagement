@@ -9,6 +9,24 @@ var table1 = 'master'
 var table2 = 'agent'
 var table3 = 'customer'
 
+
+var today = new Date();
+var dd = today.getDate();
+
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+if(dd<10) 
+{
+    dd='0'+dd;
+} 
+
+if(mm<10) 
+{
+    mm='0'+mm;
+} 
+today = yyyy+'-'+mm+'-'+dd;
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -243,6 +261,7 @@ router.post('/agent-index',(req,res)=>{
 
 router.post('/save-earning',(req,res)=>{
     let body = req.body;
+    body['date'] = today
     pool.query(`insert into earning set ?`,body,(err,result)=>{
         if(err) throw err;
         else res.json({
