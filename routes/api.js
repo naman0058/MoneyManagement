@@ -1,5 +1,6 @@
 const { resolveInclude } = require('ejs');
 var express = require('express');
+const { Tab } = require('native-base');
 const { route } = require('.');
 var router = express.Router();
 var pool = require('./pool')
@@ -252,6 +253,15 @@ router.post('/save-earning',(req,res)=>{
     })
 })
 
+
+
+
+router.post('/single-customer-data',(req,res)=>{
+    pool.query(`select * from ${table3} where id = '${id}'`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    })
+})
 
 
 // router.post('/master-report',(req,res)=>{
