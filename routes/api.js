@@ -88,9 +88,7 @@ router.post('/add-master',(req,res)=>{
 router.get('/all-master',(req,res)=>{
     pool.query(`select * from ${table1} order by id desc`,(err,result)=>{
         if(err) throw err;
-        else res.json({
-            msg : 'success'
-        })
+        else res.json(result)
     })
 })
 
