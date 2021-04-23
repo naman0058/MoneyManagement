@@ -187,4 +187,29 @@ router.post('/show-customer-by-agent',(req,res)=>{
 
 
 
+router.get('/get-admin-index',(req,res)=>{
+    var query = `select sum(price) as totalamount from earning where date = CURDATE();`
+    var query1 = `select * from ${table1} order by id desc;`
+    pool.query(query+query1,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    })
+})
+
+
+
+router.get('/single-master',(req,res)=>{
+    var query = `select sum(price) as totalamount from earning where date = CURDATE() and id = '${req.body.masterid}';`
+    var query1 = `select * from ${table1} where id = '${req.body.masterid}';`
+    pool.query(query+query1,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    })
+})
+
+
+
+
+
+
 module.exports = router;
