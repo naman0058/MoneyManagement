@@ -281,6 +281,22 @@ router.post('/single-customer-data',(req,res)=>{
 })
 
 
+router.post('/single-master-data',(req,res)=>{
+    pool.query(`select * from ${table1} where id = '${req.body.id}'`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    })
+})
+
+
+router.post('/single-agent-data',(req,res)=>{
+    pool.query(`select * from ${table2} where id = '${req.body.id}'`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    })
+})
+
+
 // router.post('/master-report',(req,res)=>{
 //     pool.query(`select * from earning `)
 // })
