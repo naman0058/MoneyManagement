@@ -109,9 +109,7 @@ router.post('/add-agent',(req,res)=>{
 router.post('/show-all-agent',(req,res)=>{
     pool.query(`select * from ${table2} order by id desc`,(err,result)=>{
         if(err) throw err;
-        else res.json({
-            msg : 'success'
-        })
+        else res.json(result)
     })
 })
 
@@ -121,9 +119,7 @@ router.post('/show-all-agent',(req,res)=>{
 router.post('/show-agent',(req,res)=>{
     pool.query(`select * from ${table2} where masterid = '${req.body.masterid}' order by id desc`,(err,result)=>{
         if(err) throw err;
-        else res.json({
-            msg : 'success'
-        })
+        else res.json(result)
     })
 })
 
