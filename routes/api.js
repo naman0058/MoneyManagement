@@ -124,7 +124,7 @@ router.post('/add-agent',(req,res)=>{
 
 
 
-router.post('/show-all-agent',(req,res)=>{
+router.get('/show-all-agent',(req,res)=>{
     pool.query(`select * from ${table2} order by id desc`,(err,result)=>{
         if(err) throw err;
         else res.json(result)
