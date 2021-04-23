@@ -255,7 +255,7 @@ router.post('/save-earning',(req,res)=>{
 
 
 router.post('/single-customer-data',(req,res)=>{
-    pool.query(`select * from ${table3} where id = '${id}'`,(err,result)=>{
+    pool.query(`select * from ${table3} where id = '${req.body.id}'`,(err,result)=>{
         if(err) throw err;
         else res.json(result)
     })
