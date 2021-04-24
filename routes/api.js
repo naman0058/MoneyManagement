@@ -38,7 +38,7 @@ router.get('/', function(req, res, next) {
 router.post('/login',(req,res)=>{
     let body = req.body;
     if(req.body.type == 'admin'){
-        pool.query(`select * from ${table} where number = '${req.body.number}' and password = '${rq.body.password}'`,(err,result)=>{
+        pool.query(`select * from ${table} where number = '${req.body.number}' and password = '${req.body.password}'`,(err,result)=>{
             if(err) throw err;
             else if(result[0]){
                 res.json({
@@ -55,7 +55,7 @@ router.post('/login',(req,res)=>{
 
     }
     else if(req.body.type=='master'){
-        pool.query(`select * from ${table1} where number = '${req.body.number}' and password = '${rq.body.password}'`,(err,result)=>{
+        pool.query(`select * from ${table1} where number = '${req.body.number}' and password = '${req.body.password}'`,(err,result)=>{
             if(err) throw err;
             else if(result[0]){
                 res.json({
@@ -72,11 +72,12 @@ router.post('/login',(req,res)=>{
         })
     }
     else {
-        pool.query(`select * from ${table1} where number = '${req.body.number}' and password = '${rq.body.password}'`,(err,result)=>{
+        pool.query(`select * from ${table2} where number = '${req.body.number}' and password = '${req.body.password}'`,(err,result)=>{
             if(err) throw err;
             else if(result[0]){
                 res.json({
-                    msg : 'success'
+                    msg : 'success',
+                    result:result
                 })
             }
             else {
