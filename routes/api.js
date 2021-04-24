@@ -42,7 +42,8 @@ router.post('/login',(req,res)=>{
             if(err) throw err;
             else if(result[0]){
                 res.json({
-                    msg : 'success'
+                    msg : 'success',
+                    result : result
                 })
             }
             else {
@@ -58,12 +59,14 @@ router.post('/login',(req,res)=>{
             if(err) throw err;
             else if(result[0]){
                 res.json({
-                    msg : 'success'
+                    msg : 'success',
+                    result : result
                 })
             }
             else {
                 res.json({
-                    msg : 'fail'
+                    msg : 'fail',
+                    result : result
                 })
             }
         })
