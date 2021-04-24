@@ -179,9 +179,7 @@ router.post('/add-customer',(req,res)=>{
 router.post('/show-customer-by-master',(req,res)=>{
     pool.query(`select * from ${table3} where masterid = '${req.body.masterid}' order by id desc`,(err,result)=>{
         if(err) throw err;
-        else res.json({
-            msg : 'success'
-        })
+        else res.json(result)
     })
 })
 
@@ -191,9 +189,7 @@ router.post('/show-customer-by-master',(req,res)=>{
 router.post('/show-customer-by-agent',(req,res)=>{
     pool.query(`select * from ${table3} where agentid = '${req.body.agentid}' order by id desc`,(err,result)=>{
         if(err) throw err;
-        else res.json({
-            msg : 'success'
-        })
+        else res.json(result)
     })
 })
 
