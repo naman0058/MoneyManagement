@@ -286,7 +286,9 @@ router.post('/single-master-data',(req,res)=>{
 
 
 router.post('/single-agent-data',(req,res)=>{
-    pool.query(`select * from ${table2} where id = '${req.body.id}'`,(err,result)=>{
+    var query = `select * from ${table2} where id = '${req.body.id}';`
+    var query1 = `select sum (price) from earning where agentid = '${req.body.id}';`
+    pool.query(query+query1,(err,result)=>{
         if(err) throw err;
         else res.json(result)
     })
