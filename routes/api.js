@@ -279,7 +279,7 @@ router.post('/single-customer-data',(req,res)=>{
 
 router.post('/single-master-data',(req,res)=>{
     var query = `select * from ${table1} where id = '${req.body.id}';`
-    var query1 = `select sum (price) as totalamount from earning where master = '${req.body.id}';`
+    var query1 = `select sum (price) as totalamount from earning where masterid = '${req.body.id}';`
     pool.query(query+query1,(err,result)=>{
         if(err) throw err;
         else res.json(result)
