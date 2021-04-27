@@ -306,4 +306,37 @@ router.post('/single-agent-data',(req,res)=>{
 // })
 
 
+router.post('/delete-master-data',(req,res)=>{
+    pool.query(`delete from master where id = '${req.body.id}'`,(err,result)=>{
+        if(err) throw err;
+        else res.json({
+            msg : 'success'
+        })
+    })
+})
+
+
+
+
+router.post('/delete-agent-data',(req,res)=>{
+    pool.query(`delete from agent where id = '${req.body.id}'`,(err,result)=>{
+        if(err) throw err;
+        else res.json({
+            msg : 'success'
+        })
+    })
+})
+
+
+
+router.post('/delete-customer-data',(req,res)=>{
+    pool.query(`delete from customer where id = '${req.body.id}'`,(err,result)=>{
+        if(err) throw err;
+        else res.json({
+            msg : 'success'
+        })
+    })
+})
+
+
 module.exports = router;
