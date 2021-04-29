@@ -339,4 +339,24 @@ router.post('/delete-customer-data',(req,res)=>{
 })
 
 
+
+
+router.get('/show-report',(req,res)=>{
+    console.log('r',req.query)
+    if(req.query.type =='master'){
+        pool.query(`select * from earning WHERE masterid = '${req.query.masterid}' and date BETWEEN ${req.query.fromDate} AND ${req.query.toDate};`,(err,result)=>{
+            if(err) throw err;
+            else res.render('report',{result:result})
+    })
+    }
+    else {
+        pool.query(`select * from earning WHERE agentid = '${req.query.agentid}' and date BETWEEN ${req.query.fromDate} AND ${req.query.toDate};`,(err,result)=>{
+            if(err) throw err;
+            else res.render('report',{result:result})
+    })
+    }
+    
+  })
+
+
 module.exports = router;
