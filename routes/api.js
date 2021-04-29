@@ -344,13 +344,13 @@ router.post('/delete-customer-data',(req,res)=>{
 router.get('/show-report',(req,res)=>{
     console.log('r',req.query)
     if(req.query.type =='master'){
-        pool.query(`select * from earning WHERE masterid = '${req.query.masterid}' and date BETWEEN ${req.query.fromDate} AND ${req.query.toDate};`,(err,result)=>{
+        pool.query(`select e.* , (select a.name from agent a where a.id = e.agentid) as agentname from earning e WHERE e.masterid = '${req.query.masterid}' and e.date BETWEEN '${req.query.fromDate}' AND '${req.query.toDate}'`,(err,result)=>{
             if(err) throw err;
-            else res.render('report',{result:result})
+            else res.render('report1',{result:result})
     })
     }
     else {
-        pool.query(`select * from earning WHERE agentid = '${req.query.agentid}' and date BETWEEN ${req.query.fromDate} AND ${req.query.toDate};`,(err,result)=>{
+        pool.query(`select * from earning WHERE agentid = '${req.query.agentid}' and date BETWEEN '${req.query.fromDate}' AND '${req.query.toDate}'`,(err,result)=>{
             if(err) throw err;
             else res.render('report',{result:result})
     })
