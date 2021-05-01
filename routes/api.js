@@ -200,7 +200,7 @@ router.post('/show-customer-by-agent',(req,res)=>{
 
 
 router.get('/get-admin-index',(req,res)=>{
-    var query = `select sum(price) as totalamount from earning where date = CURDATE();`
+    var query = `select sum(price) as totalamount from earning where date = '${today}';`
     var query1 = `select * from ${table1} order by id desc;`
     pool.query(query+query1,(err,result)=>{
         if(err) throw err;
@@ -212,7 +212,7 @@ router.get('/get-admin-index',(req,res)=>{
 
 
 router.post('/get-master-index',(req,res)=>{
-    var query = `select sum(price) as totalamount from earning where date = CURDATE() and masterid = '${req.body.masterid}';`
+    var query = `select sum(price) as totalamount from earning where date = '${today}' and masterid = '${req.body.masterid}';`
     var query1 = `select * from ${table2} where masterid = '${req.body.masterid}' order by id desc;`
     pool.query(query+query1,(err,result)=>{
         if(err) throw err;
@@ -223,7 +223,7 @@ router.post('/get-master-index',(req,res)=>{
 
 
 router.get('/single-master',(req,res)=>{
-    var query = `select sum(price) as totalamount from earning where date = CURDATE() and id = '${req.body.masterid}';`
+    var query = `select sum(price) as totalamount from earning where date = '${today}' and id = '${req.body.masterid}';`
     var query1 = `select * from ${table1} where id = '${req.body.masterid}';`
     pool.query(query+query1,(err,result)=>{
         if(err) throw err;
@@ -235,7 +235,7 @@ router.get('/single-master',(req,res)=>{
 
 
 router.get('/single-agent',(req,res)=>{
-    var query = `select sum(price) as totalamount from earning where date = CURDATE() and id = '${req.body.masterid}';`
+    var query = `select sum(price) as totalamount from earning where date = '${today}' and id = '${req.body.masterid}';`
     var query1 = `select * from ${table1} where id = '${req.body.masterid}';`
     pool.query(query+query1,(err,result)=>{
         if(err) throw err;
@@ -248,7 +248,7 @@ router.get('/single-agent',(req,res)=>{
 
 
 router.post('/agent-index',(req,res)=>{
-    var query = `select sum(price) as totalamount from earning where date = CURDATE() and agentid = '${req.body.agentid}';`
+    var query = `select sum(price) as totalamount from earning where date = '${today}' and agentid = '${req.body.agentid}';`
     var query1 = `select * from ${table3} where agentid = '${req.body.agentid}' order by id desc;`
    pool.query(query+query1,(err,result)=>{
        if(err) throw err;
