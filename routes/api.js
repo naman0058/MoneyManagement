@@ -248,6 +248,7 @@ router.get('/single-agent',(req,res)=>{
 
 
 router.post('/agent-index',(req,res)=>{
+    console.log(today)
     var query = `select sum(price) as totalamount from earning where date = '${today}' and agentid = '${req.body.agentid}';`
     var query1 = `select * from ${table3} where agentid = '${req.body.agentid}' order by id desc;`
    pool.query(query+query1,(err,result)=>{
