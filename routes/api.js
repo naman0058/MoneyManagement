@@ -27,6 +27,9 @@ if(mm<10)
 today = yyyy+'-'+mm+'-'+dd;
 
 
+console.log('today',today)
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
