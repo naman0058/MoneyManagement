@@ -36,7 +36,11 @@ router.get('/', function(req, res, next) {
 });
 
 
-
+router.get('/api',(req,res)=>{
+    res.json({
+        msg : 'done'
+    })
+})
 
 router.post('/login',(req,res)=>{
     let body = req.body;
